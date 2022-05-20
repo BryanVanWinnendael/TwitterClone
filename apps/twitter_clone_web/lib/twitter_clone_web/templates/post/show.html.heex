@@ -1,0 +1,77 @@
+<div class="w-full grid grid-cols-2">
+  <div class="mx-8 mb-5 mt-5 bg-main max-w-max rounded-full">
+    <%= if @user_id == "false" do %>
+      <a class="cursor-pointer" href={Routes.post_path(@conn, :index)}>
+        <svg transform = "rotate(180)" class="fill-[#fff]" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967L16.5303 11.4697C16.8232 11.7626 16.8232 12.2374 16.5303 12.5303L10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303C9.17678 18.2374 9.17678 17.7626 9.46967 17.4697L14.9393 12L9.46967 6.53033C9.17678 6.23744 9.17678 5.76256 9.46967 5.46967Z" />
+        </svg>
+      </a>
+    <% else %>
+      <a class="cursor-pointer" href={Routes.user_path(@conn, :show, @user_id)}>
+        <svg transform = "rotate(180)" class="fill-[#fff]" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967L16.5303 11.4697C16.8232 11.7626 16.8232 12.2374 16.5303 12.5303L10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303C9.17678 18.2374 9.17678 17.7626 9.46967 17.4697L14.9393 12L9.46967 6.53033C9.17678 6.23744 9.17678 5.76256 9.46967 5.46967Z" />
+        </svg>
+      </a>
+    <% end %>
+
+  
+
+  </div>
+  <div class="h-full flex items-center">
+    <h1 class="font-medium leading-tight text-2xl dark:text-gray-200"> Comments </h1>
+  </div>
+</div>
+<hr class="border-gray-800">
+
+
+
+
+<div class="flex bg-white dark:bg-mainDark shadow rounded-lg mx-8 max-w-md md:max-w-2xl mb-8 w-full">
+  <div class="flex items-start px-4 py-6">
+    <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src={@post.user.profile_image} alt="avatar">
+    <div>
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg font-semibold text-gray-900 -mt-1 dark:text-gray-200"> <%= @post.user.username %> </h2>
+        </div>
+        <p class="text-gray-500 dark:text-gray-400"><%= @post.inserted_at %></p>
+        <p class="mt-3 text-gray-700 text-sm dark:text-gray-200">
+          <%= @post.content %>
+        </p>
+    </div>
+  </div>
+</div>
+
+
+  <div class="flex items-center justify-center mx-8 w-full shadow rounded-lg p-4 max-w-md md:max-w-2xl mb-8">
+    <%= form_for @changeset, Routes.comment_path(@conn, :create, id: @post.id, user_id: @user_id), fn f -> %>
+      <%= hidden_input f, :user_id, value: @user.id %>
+      <%= textarea f, :content, placeholder: "Post your comment", class: "dark:text-gray-200 dark:bg-accentDark w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 h-28" %>
+      <div class="flex justify-end mt-2 w-full">
+        <%= submit "Submit", class: "w-max max-h-max whitespace-nowrap focus:outline-none  focus:ring rounded max-w-max bg-main hover:bg-hover items-center hover:shadow-lg text-white py-2 px-4 mr-0 text-sm mt-4" %>
+      </div>
+      
+    <% end %>
+  </div>
+
+<div class="flex flex-col-reverse">
+  <%= for comment <- @comments do %>
+    <div class="flex bg-white dark:bg-mainDark shadow rounded-lg mx-8 max-w-md md:max-w-2xl mb-8 w-full">
+      <div class="flex items-start px-4 py-6 w-full">
+        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src={@post.user.profile_image} alt="avatar">
+        <div class="w-full">
+            <div class="flex items-center justify-between w-full">
+              <h2 class="text-lg font-semibold text-gray-900 -mt-1 dark:text-gray-200"> <%= comment.user.username %> </h2>
+              <%= if comment.user.id == @current_user.id or @current_user.role == "Admin"  do %>
+                <%= link "", to: Routes.comment_path(@conn, :delete, comment.comment.id, post_id: @post.id, user_id: @user_id ), method: :delete, class: "bg-delete-icon dark:bg-delete-icon-dark bg-no-repeat h-10 w-10 mr-1"%>
+              <% end %>
+            </div>
+            <p class="text-gray-500 dark:text-gray-400"><%= comment.user.inserted_at %></p>
+            <div class="p-1">
+              <p class="text-gray-900 border-l-2 px-1 border-main bg-gray-100 rounded dark:text-gray-200 dark:bg-accentDark"> <%= comment.comment.content %></p>
+            </div>
+           
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

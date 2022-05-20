@@ -1,0 +1,46 @@
+<section >
+  <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
+  <div class="flex flex-col-reverse">
+    <%= for post <- @posts do %>
+      <div class="flexbg-white shadow rounded-lg mx-4 md:mx-auto max-w-md md:max-w-2xl mb-8 w-full">
+        <div class="flex items-start px-4 py-6">
+          <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src={post.user.profile_image} alt="avatar">
+          <div class="w-full">
+              <div class="flex items-center justify-between w-full">
+                <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-200 -mt-1"> <%= post.user.username %> </h2>
+              </div>
+              <p class="text-gray-500 dark:text-gray-400"><%= post.inserted_at %></p>
+              <p class="mt-3 text-gray-700 dark:text-gray-200 text-sm">
+                <%= post.content %>
+              </p>
+              <div class="mt-4 flex items-center">
+              
+                <div class="flex text-gray-700 text-sm mr-3 dark:text-gray-200">
+                  <%= if Enum.find(post.likes, fn l -> l.user_id == @current_user.id end) do %>
+                    <%= link "", to: Routes.like_path(@conn, :delete, post.id, user_id: false ), method: :delete, class: "bg-heart-icon-filled dark:bg-heart-icon-filled-dark bg-no-repeat h-6 w-6 mr-1" %>
+                  <% else %>
+                    <%= link "", to: Routes.like_path(@conn, :create, post.id, user_id: false ), method: :post, class: "bg-heart-icon dark:bg-heart-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
+                  <% end %>
+                  <%= length(post.likes ) %>
+                </div>
+
+                <div class="flex text-gray-700 text-sm mr-8 dark:text-gray-200">
+                    <%= link "", to: Routes.post_path(@conn, :show, post.id, user_id: false ), class: "bg-comments-icon dark:bg-comments-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
+                    <%= length(post.comments ) %>
+                </div>
+
+                <div class="flex text-gray-700 text-sm mr-4 dark:text-gray-200" onclick="copyToClipboard({post.id})">
+                    <svg fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-1" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                    </svg>
+                    <span>share</span>
+                </div>
+
+              </div>
+          </div>
+        </div>
+      </div>  
+    <% end %>
+  </div>
+
+</section>

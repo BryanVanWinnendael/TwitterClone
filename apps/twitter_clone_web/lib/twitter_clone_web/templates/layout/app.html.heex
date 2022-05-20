@@ -1,0 +1,10 @@
+<main>
+  <!--
+  -->
+  <%= if @logged_in? do %>
+    <p class="alert alert-info m-3" role="alert"><%= get_flash(@conn, :info) %></p>
+    <p class="alert alert-danger m-3" role="alert"><%= get_flash(@conn, :error) %></p>
+  <% end %>
+
+  <%= @inner_content %>
+</main>

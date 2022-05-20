@@ -1,0 +1,15 @@
+<.form let={f} for={@changeset} action={@action} class="bg-white dark:bg-mainDark shadow rounded-lg mb-6 p-4">
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>You must type something before tweeting</p>
+    </div>
+  <% end %>
+
+  <%= textarea f, :content, placeholder: "Type something...", class: "dark:bg-accentDark dark:text-gray-200 w-full rounded-lg p-2 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 h-28" %>
+
+  <div class="flex justify-end mt-2 w-full">
+    <%= submit "Tweet", class: "w-max max-h-max whitespace-nowrap focus:outline-none  focus:ring rounded max-w-max bg-main hover:bg-hover items-center hover:shadow-lg text-white py-2 px-4 mr-0 text-sm mt-4" %>
+  </div>
+</.form>
+
+

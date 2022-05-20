@@ -1,0 +1,24 @@
+<div class="w-full grid grid-cols-2">
+    <div class="mx-8 mb-5 mt-5 bg-main max-w-max rounded-full">
+      <a class="cursor-pointer" href={Routes.post_path(@conn, :index)}>
+        <svg transform = "rotate(180)" class="fill-[#fff]" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967L16.5303 11.4697C16.8232 11.7626 16.8232 12.2374 16.5303 12.5303L10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303C9.17678 18.2374 9.17678 17.7626 9.46967 17.4697L14.9393 12L9.46967 6.53033C9.17678 6.23744 9.17678 5.76256 9.46967 5.46967Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="h-full flex items-center">
+      <h1 class="font-medium leading-tight text-2xl dark:text-gray-200"> Results </h1>
+    </div>
+  </div>
+  <hr class="border-gray-800">
+
+
+<%= for user <- @users do %>
+    <a href={Routes.user_path(@conn, :show, user.id)} class="dark:bg-accentDark mt-5 max-w-sm w-full z-10 bg-gray-100 shadow rounded-lg p-5 ml-5 flex items-center">
+        <img class="md rounded-full relative h-12 w-12" src={user.profile_image} alt="profile">
+        <div>
+        <h2 class="ml-5 text-lg text-gray-800 font-bold leading-none dark:text-gray-200"><%= user.username %></h2>
+        </div>
+    </a>
+<%= end %>
+

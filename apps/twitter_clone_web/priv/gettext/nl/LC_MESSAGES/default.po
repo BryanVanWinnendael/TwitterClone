@@ -1,0 +1,67 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: nl\n"
+"Plural-Forms: nplurals=2\n"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:87
+msgid "Change language"
+msgstr "Taal wijzigen"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:31
+msgid "Change theme"
+msgstr "Thema veranderen"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:88
+msgid "Control what language is used to personalize your Twitter experience."
+msgstr "Bepaal welke taal wordt gebruikt om je Twitter-ervaring te personaliseren."
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/language.html.heex:10
+msgid "Language"
+msgstr "Taal"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:2
+msgid "Settings"
+msgstr "Instellingen"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:11
+msgid "Your account"
+msgstr "Jouw account"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:32
+msgid "Change your theme to dark or light mode."
+msgstr "Verander je thema in donkere of lichte modus."
+
+#, elixir-autogen, elixir-format, fuzzy
+#: lib/twitter_clone_web/templates/settings/language.html.heex:16
+msgid "Languages"
+msgstr "Talen"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:12
+msgid "View your details, change your details or delete your account."
+msgstr "Bekijk je gegevens, wijzig je gegevens of verwijder je account."
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:120
+msgid "Generate API Key"
+msgstr "Genereer een API Key"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:121
+msgid "Generate a personal API Key."
+msgstr "Genereer a persoonlijke API Key"

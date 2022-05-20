@@ -1,0 +1,67 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+"Plural-Forms: nplurals=2\n"
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:87
+msgid "Change language"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:31
+msgid "Change theme"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:88
+msgid "Control what language is used to personalize your Twitter experience."
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/language.html.heex:10
+msgid "Language"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:2
+msgid "Settings"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:11
+msgid "Your account"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:32
+msgid "Change your theme to dark or light mode."
+msgstr ""
+
+#, elixir-autogen, elixir-format, fuzzy
+#: lib/twitter_clone_web/templates/settings/language.html.heex:16
+msgid "Languages"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:12
+msgid "View your details, change your details or delete your account."
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:120
+msgid "Generate API Key"
+msgstr ""
+
+#, elixir-autogen, elixir-format
+#: lib/twitter_clone_web/templates/settings/index.html.heex:121
+msgid "Generate a personal API Key."
+msgstr ""

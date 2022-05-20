@@ -1,0 +1,42 @@
+<section>
+  <div class="w-full grid grid-cols-2">
+    <div class="mx-8 mb-5 mt-5 bg-main max-w-max rounded-full">
+      <a class="cursor-pointer" href={Routes.user_path(@conn, :show, @user.id)}>
+        <svg transform = "rotate(180)" class="fill-[#fff]" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967L16.5303 11.4697C16.8232 11.7626 16.8232 12.2374 16.5303 12.5303L10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303C9.17678 18.2374 9.17678 17.7626 9.46967 17.4697L14.9393 12L9.46967 6.53033C9.17678 6.23744 9.17678 5.76256 9.46967 5.46967Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="h-full flex items-center">
+      <h1 class="font-medium leading-tight text-2xl dark:text-gray-200"> @<%= @user.username %> </h1>
+    </div>
+  </div>
+  <hr class="border-gray-800">
+
+
+  <div class="w-full flex justify-evenly h-12 items-center">
+    <a href={Routes.user_path(@conn, :following, @user.id)} class="dark:text-gray-200">Following</a>
+    <a href={Routes.user_path(@conn, :followers, @user.id)} class="border-b-2 border-main dark:text-gray-200">Followers</a>
+  </div>
+  <hr class="border-gray-800">
+
+  <%= if length(@followers) == 0 do%>
+    <%= if @current_user.id == @user.id do %>
+      <p class="text-center text-gray-600 dark:text-gray-400 font-bold text-lg mt-2">You don't have any followers yet.</p>
+    <% else %>
+      <p class="text-center text-gray-600 dark:text-gray-400 font-bold text-lg mt-2"><%= @user.username %> doesn't have any followers yet.</p>
+    <% end %>
+    <p class="text-center text-gray-400 dark:text-gray-600 font-semibold text-md">When someone follows you, you can see them here.</p>
+  <% end %>
+
+  <%= for user <- @followers do %>
+    <a href={Routes.user_path(@conn, :show, user.user.id)} class="dark:bg-accentDark mt-5 max-w-sm w-full z-10 bg-gray-100 shadow rounded-lg p-5 ml-5 flex items-center">
+      <img class="md rounded-full relative h-12" src={user.user.profile_image} alt="profile">
+      <div>
+        <h2 class="ml-5 text-lg text-gray-800 font-bold leading-none dark:text-gray-200"><%= user.user.username %></h2>
+        <p class="ml-5 mt-2 text-sm text-gray-600 leading-none dark:text-gray-400">Followed sinds: <%= user.user_relations.inserted_at %></p>
+      </div>
+		</a>
+  <% end %>
+</section>
+

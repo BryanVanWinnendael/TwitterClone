@@ -1,0 +1,64 @@
+<div class="w-full grid grid-cols-2">
+    <div class="mx-8 mb-5 mt-5 bg-main max-w-max rounded-full">
+      <a class="cursor-pointer" href={Routes.settings_path(@conn, :index)}>
+        <svg transform = "rotate(180)" class="fill-[#fff]" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.46967 5.46967C9.76256 5.17678 10.2374 5.17678 10.5303 5.46967L16.5303 11.4697C16.8232 11.7626 16.8232 12.2374 16.5303 12.5303L10.5303 18.5303C10.2374 18.8232 9.76256 18.8232 9.46967 18.5303C9.17678 18.2374 9.17678 17.7626 9.46967 17.4697L14.9393 12L9.46967 6.53033C9.17678 6.23744 9.17678 5.76256 9.46967 5.46967Z" />
+        </svg>
+      </a>
+    </div>
+    <div class="h-full flex flex-col items-start">
+      <div class="flex flex-col items-center">
+        <h1 class="font-medium leading-tight text-2xl dark:text-gray-200"> Edit account </h1>
+        <h1 class="text-gray-400 dark:text-gray-600 font-semibold text-md"> @<%= @user.username %> </h1>
+      </div>
+    </div>
+</div>
+<hr class="border-gray-800">
+<div class="m-5">
+    <%= form_for @changeset, Routes.user_path(@conn, :updateUser, @user.id), fn f -> %>
+
+        <%= label f, :username, class: "dark:text-gray-300" %>
+        <%= text_input f, :username, placeholder: "username", class: "dark:text-gray-300 dark:bg-mainDark" %>
+        <%= error_tag f, :username %>
+
+        <%= label f, :password, class: "dark:text-gray-300" %>
+        <%= text_input f, :password, placeholder: "password", class: "dark:text-gray-300 dark:bg-mainDark" %>
+        <%= error_tag f, :password %>
+
+        <%= label f, :email, class: "dark:text-gray-300" %>
+        <%= text_input f, :email, placeholder: "email", class: "dark:text-gray-300 dark:bg-mainDark" %>
+        <%= error_tag f, :email %>
+        
+        <%= label f, :date_of_birth, class: "dark:text-gray-300" %>
+        <div class="flex border border-[#CBD5E0] rounded-md w-max p-2 mb-5">
+            <%= date_select f, :date_of_birth %>
+            <%= error_tag f, :date_of_birth %>
+        </div>
+
+        <%= if @current_user.role == "Admin" do %>
+          <%= label f, :role, class: "font-medium leading-tight text-md dark:text-gray-200" %>
+          <%= select f, :role, @acceptable_roles,  class: "flex border border-[#CBD5E0] rounded-md w-max p-2" %>
+          <%= error_tag f, :role %>
+
+
+          <%= label f, :profile_image, class: "font-medium leading-tight text-md dark:text-gray-200 mt-5" %>
+          <%= text_input f, :profile_image, placeholder: "Profile image link", class: "dark:bg-accentDark dark:text-gray-200" %>
+          <%= error_tag f, :profile_image %>
+
+          <label class="font-medium leading-tight text-md dark:text-gray-200">Banner image</label>
+          <%= text_input f, :banner_image, placeholder: "Banner image link", class: "dark:bg-accentDark dark:text-gray-200" %>
+          <%= error_tag f, :banner_image %>
+
+        <% end %>
+
+
+        
+        <div>
+            <%= submit "Edit" , class: "bg-main hover:bg-hover mt-5 text-white font-bold py-2 px-4 rounded w-full text-lg pl-9 pr-9"%>
+        </div>
+    <% end %>
+
+    <h1 class="text-gray-600 dark:text-gray-400 font-bold text-lg mt-5">Delete your account?</h1>
+    <h2 class="text-gray-400 dark:text-gray-600 font-semibold text-md mb-5">You are going to delete your twitter account. All your posts and comments will also be deleted.</h2>
+    <span><%= link "Delete", to: Routes.user_path(@conn, :delete, @user.id, logout: true), method: :delete, data: [confirm: "Are you sure?"], class: "bg-[#a94442] hover:bg-[#833534] mt-5 text-white font-bold py-2 px-4 rounded w-full text-lg pl-9 pr-9" %></span>
+</div>

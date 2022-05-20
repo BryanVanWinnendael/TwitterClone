@@ -1,0 +1,48 @@
+<.form let={f} for={@changeset} action={@action}>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= if @action !== "/register" do %>
+    <label class="font-medium leading-tight text-md dark:text-gray-200">Profile image</label>
+    <%= text_input f, :profile_image, placeholder: "Profile image link", class: "dark:bg-accentDark dark:text-gray-200" %>
+    <%= error_tag f, :profile_image %>
+
+    <label class="font-medium leading-tight text-md dark:text-gray-200">Banner image</label>
+    <%= text_input f, :banner_image, placeholder: "Banner image link", class: "dark:bg-accentDark dark:text-gray-200" %>
+    <%= error_tag f, :banner_image %>
+
+    <div>
+      <%= submit "Edit", class: "bg-main hover:bg-hover mt-5 text-white font-bold py-2 px-4 rounded w-full text-lg pl-9 pr-9"%>
+    </div>
+  <% end %>
+
+  <%= if @action == "/register" do %>
+    
+    <%= text_input f, :username, placeholder: "username" %>
+    <%= error_tag f, :username %>
+
+    <%= password_input f, :password, placeholder: "password" %>
+    <%= error_tag f, :password %>
+
+    <%= text_input f, :email, placeholder: "email" %>
+    <%= error_tag f, :email %>
+    
+    <%= label f, :date_of_birth %>
+    <div class="flex border border-[#CBD5E0] rounded-md w-max p-2">
+      <%= date_select f, :date_of_birth %>
+      <%= error_tag f, :date_of_birth %>
+    </div>
+    
+    <div>
+      <%= submit "Register" , class: "bg-main hover:bg-hover mt-5 text-white font-bold py-2 px-4 rounded w-full text-lg pl-9 pr-9"%>
+    </div>
+
+  <% end %>
+
+
+
+
+</.form>
