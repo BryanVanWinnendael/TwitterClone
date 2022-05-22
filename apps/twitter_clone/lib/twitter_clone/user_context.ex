@@ -77,9 +77,15 @@ defmodule TwitterClone.UserContext do
 
   def update_user(attrs, %User{} = user, current_user) do
     unless current_user.role != "Admin" and current_user.id != user.id do
-      user
-      |> User.changeset_edit_account(attrs)
-      |> Repo.update()
+      if current_user.role == "Admin" do
+        user
+        |> User.changeset_edit_account_admin(attrs)
+        |> Repo.update()
+      else
+        user
+        |> User.changeset_edit_account(attrs)
+        |> Repo.update()
+      end
     else
       {:error, :no_permission}
     end

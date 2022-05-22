@@ -13,6 +13,7 @@ defmodule TwitterCloneWeb.PostController do
 
   def index(conn, _params) do
     changeset = PostContext.change_post(%Post{})
+    current_user = Guardian.Plug.current_resource(conn)
     posts = PostContext.list_posts()
 
     render(conn, "index.html", posts: posts, changeset: changeset)
@@ -54,9 +55,16 @@ defmodule TwitterCloneWeb.PostController do
 
     case PostContext.delete_post(post, current_user) do
       {:ok, _user} ->
-        conn
-        |> put_flash(:info, "Post deleted successfully.")
-        |> redirect(to: Routes.user_path(conn, :show, user_id))
+        if user_id == "false" do
+          conn
+          |> put_flash(:info, "Post deleted successfully.")
+          |> redirect(to: Routes.post_path(conn, :index))
+        else
+          conn
+          |> put_flash(:info, "Post deleted successfully.")
+          |> redirect(to: Routes.user_path(conn, :show, post.user.id, user_id: user_id))
+        end
+
 
       {:error, :no_permission} ->
         conn

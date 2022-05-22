@@ -40,9 +40,9 @@ defmodule TwitterClone.UserContext.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :role, :api_token])
+    |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :api_token])
     |> unique_constraint(:username)
-    |> validate_required([:username, :password, :date_of_birth, :email, :role])
+    |> validate_required([:username, :password, :date_of_birth, :email])
     |> validate_inclusion(:role, @acceptable_roles)
     |> put_password_hash()
 
@@ -51,21 +51,27 @@ defmodule TwitterClone.UserContext.User do
   @doc false
   def changeset_edit_profile(user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :role, :api_token])
+    |> cast(attrs, [:profile_image, :banner_image])
+  end
+
+  @doc false
+  def changeset_edit_account(user, attrs) do
+    user
+    |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image])
     |> unique_constraint(:username)
-    |> validate_inclusion(:role, @acceptable_roles)
+    |> validate_required([:username, :date_of_birth, :email])
     |> put_password_hash()
   end
 
-    @doc false
-    def changeset_edit_account(user, attrs) do
-      user
-      |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :role])
-      |> unique_constraint(:username)
-      |> validate_required([:username, :date_of_birth, :email, :role])
-      |> validate_inclusion(:role, @acceptable_roles)
-      |> put_password_hash()
-    end
+  @doc false
+  def changeset_edit_account_admin(user, attrs) do
+    user
+    |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :role])
+    |> unique_constraint(:username)
+    |> validate_required([:username, :date_of_birth, :email, :role])
+    |> validate_inclusion(:role, @acceptable_roles)
+    |> put_password_hash()
+  end
 
 
 end
