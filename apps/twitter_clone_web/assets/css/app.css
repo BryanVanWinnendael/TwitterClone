@@ -5,6 +5,21 @@
 
 /* Alerts and form errors used by phx.new */
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #85a5e0;
+}
+
 body{
   overflow-x: hidden;
 }

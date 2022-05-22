@@ -122,17 +122,25 @@ defmodule TwitterClone.UserContext do
     end
   end
 
-  def change_user( %User{} = user, current_user, attrs \\ %{} ) do
+  def change_user_account( %User{} = user, current_user, attrs \\ %{} ) do
     unless current_user.role != "Admin" and current_user.id != user.id do
-      User.changeset(user, attrs)
+      User.changeset_edit_account(user, attrs)
     else
       {:error, :no_permission}
     end
   end
 
+  def change_user_profile( %User{} = user, current_user, attrs \\ %{} ) do
+    unless current_user.role != "Admin" and current_user.id != user.id do
+      User.changeset_edit_profile(user, attrs)
+    else
+      {:error, :no_permission}
+    end
+  end
+
+
   def change_new_user(attrs \\ %{}, %User{} = user) do
     User.changeset(user, attrs)
   end
-
 
 end

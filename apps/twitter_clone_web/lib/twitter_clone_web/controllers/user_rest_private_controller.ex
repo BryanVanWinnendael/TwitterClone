@@ -50,9 +50,6 @@ defmodule TwitterCloneWeb.UserRestPrivateController do
     current_user_id = conn.assigns.current_user
     current_user = UserContext.get_user!(current_user_id)
 
-    IO.puts(current_user.role)
-    IO.puts(current_user.id)
-
     user = UserContext.get_user!(id)
 
     case UserContext.delete_user(user, current_user) do

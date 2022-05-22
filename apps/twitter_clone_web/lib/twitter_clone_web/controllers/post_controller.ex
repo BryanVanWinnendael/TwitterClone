@@ -14,9 +14,10 @@ defmodule TwitterCloneWeb.PostController do
   def index(conn, _params) do
     changeset = PostContext.change_post(%Post{})
     current_user = Guardian.Plug.current_resource(conn)
-    posts = PostContext.list_posts()
+    posts = PostContext.get_following_posts(current_user)
+    yourPosts = PostContext.get_user_posts(current_user)
 
-    render(conn, "index.html", posts: posts, changeset: changeset)
+    render(conn, "index.html", posts: posts, changeset: changeset, yourPosts: yourPosts)
   end
 
   def new(conn, %{"id" => id}) do

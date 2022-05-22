@@ -48,32 +48,50 @@ defmodule TwitterCloneWeb.UserController do
   def editProfile(conn, %{"id" => id}) do
     user = UserContext.get_user!(id)
     current_user = Guardian.Plug.current_resource(conn)
-    changeset = UserContext.change_user(user, current_user)
+    changeset = UserContext.change_user_profile(user, current_user)
 
     if changeset ==  {:error, :no_permission} do
       conn
       |> put_flash(:error, "You are not authorized to edit this user.")
       |> redirect(to: Routes.post_path(conn, :index))
+    else
+      render(conn, "edit_profile.html", user: user, changeset: changeset)
     end
 
-    render(conn, "edit_profile.html", user: user, changeset: changeset)
   end
-
 
 
   def edit(conn, %{"id" => id}) do
     user = UserContext.get_user!(id)
     current_user = Guardian.Plug.current_resource(conn)
-    changeset = UserContext.change_user(user, current_user)
+    changeset = UserContext.change_user_account(user, current_user)
+
+    # case UserContext.change_user_account(user, current_user) do
+    #   {:ok, changeset} ->
+    #     roles = UserContext.get_acceptable_roles()
+    #     render(conn, "edit.html", user: user, changeset: changeset, acceptable_roles: roles)
+
+    #   {:error, :no_permission} ->
+    #     conn
+    #     |> put_flash(:error, "You are not authorized to edit this user.")
+    #     |> redirect(to: Routes.post_path(conn, :index))
+
+    #   {:error, %Ecto.Changeset{} = changeset} ->
+    #     conn
+    #   |> put_flash(:error, "You are not authorized to edit this user.")
+    #   |> redirect(to: Routes.post_path(conn, :index))
+    # end
 
     if changeset ==  {:error, :no_permission} do
       conn
       |> put_flash(:error, "You are not authorized to edit this user.")
       |> redirect(to: Routes.post_path(conn, :index))
+    else
+      roles = UserContext.get_acceptable_roles()
+      render(conn, "edit.html", user: user, changeset: changeset, acceptable_roles: roles)
     end
 
-    roles = UserContext.get_acceptable_roles()
-    render(conn, "edit.html", user: user, changeset: changeset, acceptable_roles: roles)
+
   end
 
 

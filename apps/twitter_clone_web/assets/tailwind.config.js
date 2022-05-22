@@ -41,9 +41,6 @@ module.exports = {
         'mainDark' : '#0e0e10',
         'accentDark' : '#121212',
       },
-    
-
-
     },
   },
   variants: {
@@ -54,7 +51,7 @@ module.exports = {
         const extendUnderline = {
             '.underline': {
                 'textDecoration': 'underline',
-                'text-decoration-color': '#8db4fc',
+                'text-decoration-color': '#62b2ed',
             },
         }
         addUtilities(extendUnderline)

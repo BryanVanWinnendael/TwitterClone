@@ -1,42 +1,91 @@
 <section >
   <%= render "form.html", Map.put(assigns, :action, Routes.post_path(@conn, :create)) %>
-  <div class="flex flex-col-reverse">
-    <%= for post <- @posts do %>
-      <div class="flexbg-white shadow rounded-lg mx-4 md:mx-auto max-w-md md:max-w-2xl mb-8 w-full">
-        <div class="flex items-start px-4 py-6">
-          <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src={post.user.profile_image} alt="avatar">
-          <div class="w-full">
-              <div class="flex items-center justify-between w-full">
-                <%= link post.user.username, to: Routes.user_path(@conn, :show, post.user.id ), class: "text-lg font-semibold text-gray-900 dark:text-gray-200 mt-1" %>
-                <%= if @current_user.id == post.user.id or @current_user.role == "Admin" do %>
-                  <%= link "", to: Routes.post_path(@conn, :delete, post.id, user_id: false), method: :delete, class: "bg-delete-icon dark:bg-delete-icon-dark bg-no-repeat h-10 w-10 mr-1"%>
-                <% end %>
-              </div>
-              <p class="text-gray-500 dark:text-gray-400"><%= post.inserted_at %></p>
-              <p class="mt-3 text-gray-700 dark:text-gray-200 text-sm">
-                <%= post.content %>
-              </p>
-              <div class="mt-4 flex items-center">
-              
-                <div class="flex text-gray-700 text-sm mr-3 dark:text-gray-200">
-                  <%= if Enum.find(post.likes, fn l -> l.user_id == @current_user.id end) do %>
-                    <%= link "", to: Routes.like_path(@conn, :delete, post.id, user_id: false ), method: :delete, class: "bg-heart-icon-filled dark:bg-heart-icon-filled-dark bg-no-repeat h-6 w-6 mr-1" %>
-                  <% else %>
-                    <%= link "", to: Routes.like_path(@conn, :create, post.id, user_id: false ), method: :post, class: "bg-heart-icon dark:bg-heart-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
-                  <% end %>
-                  <%= length(post.likes ) %>
-                </div>
-
-                <div class="flex text-gray-700 text-sm mr-8 dark:text-gray-200">
-                    <%= link "", to: Routes.post_path(@conn, :show, post.id, user_id: false ), class: "bg-comments-icon dark:bg-comments-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
-                    <%= length(post.comments ) %>
-                </div>
-
-              </div>
-          </div>
-        </div>
-      </div>  
+    <%= if length(@posts) == 0 do%>
+      <div class="ml-5 mb-24">
+        <h1 class="text-gray-600 dark:text-gray-400 font-bold text-lg mt-5">Your feed is looking empty...</h1>
+        <h2 class="text-gray-600 dark:text-gray-400 font-semibold">Follow people to see their tweets here.</h2>
+      </div>
     <% end %>
-  </div>
+    
+    <div class="flex flex-col-reverse">
+      <%= for post <- @posts do %>
+        <div class="flexbg-white shadow rounded-lg mx-4 md:mx-auto max-w-md md:max-w-2xl mb-8 w-full">
+          <div class="flex items-start px-4 py-6">
+            <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src={post.user.profile_image} alt="avatar">
+            <div class="w-full">
+                <div class="flex items-center justify-between w-full">
+                  <%= link post.user.username, to: Routes.user_path(@conn, :show, post.user.id ), class: "text-lg font-semibold text-gray-900 dark:text-gray-200 mt-1" %>
+                  <%= if @current_user.id == post.user.id or @current_user.role == "Admin" do %>
+                    <%= link "", to: Routes.post_path(@conn, :delete, post.id, user_id: false), method: :delete, class: "bg-delete-icon dark:bg-delete-icon-dark bg-no-repeat h-10 w-10 mr-1"%>
+                  <% end %>
+                </div>
+                <p class="text-gray-500 dark:text-gray-400"><%= post.inserted_at %></p>
+                <p class="mt-3 text-gray-700 dark:text-gray-200 text-sm">
+                  <%= post.content %>
+                </p>
+                <div class="mt-4 flex items-center">
+                
+                  <div class="flex text-gray-700 text-sm mr-3 dark:text-gray-200">
+                    <%= if Enum.find(post.likes, fn l -> l.user_id == @current_user.id end) do %>
+                      <%= link "", to: Routes.like_path(@conn, :delete, post.id, user_id: false ), method: :delete, class: "bg-heart-icon-filled dark:bg-heart-icon-filled-dark bg-no-repeat h-6 w-6 mr-1" %>
+                    <% else %>
+                      <%= link "", to: Routes.like_path(@conn, :create, post.id, user_id: false ), method: :post, class: "bg-heart-icon dark:bg-heart-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
+                    <% end %>
+                    <%= length(post.likes ) %>
+                  </div>
+
+                  <div class="flex text-gray-700 text-sm mr-8 dark:text-gray-200">
+                      <%= link "", to: Routes.post_path(@conn, :show, post.id, user_id: false ), class: "bg-comments-icon dark:bg-comments-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
+                      <%= length(post.comments ) %>
+                  </div>
+
+                </div>
+            </div>
+          </div>
+        </div>  
+      <% end %>
+    </div>
+    <%= if length(@yourPosts) != 0 do%>
+      <hr/>
+      <h1 class="mx-4 md:mx-auto max-w-md md:max-w-2xl mb-8 w-full text-xl font-semibold text-gray-600 dark:text-gray-300 mt-5">Your posts</h1>
+      <div class="flex flex-col-reverse">
+        <%= for post <- @yourPosts do %>
+          <div class="flexbg-white shadow rounded-lg mx-4 md:mx-auto max-w-md md:max-w-2xl mb-8 w-full">
+            <div class="flex items-start px-4 py-6">
+              <img class="w-12 h-12 rounded-full object-cover mr-4 shadow" src={post.user.profile_image} alt="avatar">
+              <div class="w-full">
+                  <div class="flex items-center justify-between w-full">
+                    <%= link post.user.username, to: Routes.user_path(@conn, :show, post.user.id ), class: "text-lg font-semibold text-gray-900 dark:text-gray-200 mt-1" %>
+                    <%= if @current_user.id == post.user.id or @current_user.role == "Admin" do %>
+                      <%= link "", to: Routes.post_path(@conn, :delete, post.id, user_id: false), method: :delete, class: "bg-delete-icon dark:bg-delete-icon-dark bg-no-repeat h-8 w-8 mr-1"%>
+                    <% end %>
+                  </div>
+                  <p class="text-gray-500 dark:text-gray-400"><%= post.inserted_at %></p>
+                  <p class="mt-3 text-gray-700 dark:text-gray-200 text-sm">
+                    <%= post.content %>
+                  </p>
+                  <div class="mt-4 flex items-center">
+                  
+                    <div class="flex text-gray-700 text-sm mr-3 dark:text-gray-200">
+                      <%= if Enum.find(post.likes, fn l -> l.user_id == @current_user.id end) do %>
+                        <%= link "", to: Routes.like_path(@conn, :delete, post.id, user_id: false ), method: :delete, class: "bg-heart-icon-filled dark:bg-heart-icon-filled-dark bg-no-repeat h-6 w-6 mr-1" %>
+                      <% else %>
+                        <%= link "", to: Routes.like_path(@conn, :create, post.id, user_id: false ), method: :post, class: "bg-heart-icon dark:bg-heart-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
+                      <% end %>
+                      <%= length(post.likes ) %>
+                    </div>
+
+                    <div class="flex text-gray-700 text-sm mr-8 dark:text-gray-200">
+                        <%= link "", to: Routes.post_path(@conn, :show, post.id, user_id: false ), class: "bg-comments-icon dark:bg-comments-icon-dark bg-no-repeat h-6 w-6 mr-1" %>
+                        <%= length(post.comments ) %>
+                    </div>
+
+                  </div>
+              </div>
+            </div>
+          </div>  
+        <% end %>
+      </div>
+    <% end %>
 
 </section>

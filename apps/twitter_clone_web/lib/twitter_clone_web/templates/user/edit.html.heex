@@ -57,8 +57,11 @@
             <%= submit "Edit" , class: "bg-main hover:bg-hover mt-5 text-white font-bold py-2 px-4 rounded w-full text-lg pl-9 pr-9"%>
         </div>
     <% end %>
+    
+    <%= if @current_user.id == @user.id do %>
+      <h1 class="text-gray-600 dark:text-gray-400 font-bold text-lg mt-5">Delete your account?</h1>
+      <h2 class="text-gray-400 dark:text-gray-600 font-semibold text-md mb-5">You are going to delete your twitter account. All your posts and comments will also be deleted.</h2>
+      <span><%= link "Delete", to: Routes.user_path(@conn, :delete, @user.id, logout: true), method: :delete, data: [confirm: "Are you sure?"], class: "bg-[#a94442] hover:bg-[#833534] mt-5 text-white font-bold py-2 px-4 rounded w-full text-lg pl-9 pr-9" %></span>
+    <% end %>
 
-    <h1 class="text-gray-600 dark:text-gray-400 font-bold text-lg mt-5">Delete your account?</h1>
-    <h2 class="text-gray-400 dark:text-gray-600 font-semibold text-md mb-5">You are going to delete your twitter account. All your posts and comments will also be deleted.</h2>
-    <span><%= link "Delete", to: Routes.user_path(@conn, :delete, @user.id, logout: true), method: :delete, data: [confirm: "Are you sure?"], class: "bg-[#a94442] hover:bg-[#833534] mt-5 text-white font-bold py-2 px-4 rounded w-full text-lg pl-9 pr-9" %></span>
 </div>
