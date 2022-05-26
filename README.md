@@ -1,4 +1,4 @@
-# TwitterClone
+# TwitterClone <img src="https://github.com/BryanVanWinnendael/TwitterClone/blob/main/apps/twitter_clone_web/priv/static/images/twitter.png" alt="drawing" width="50"/> 
 
 ## Setup Database
 
@@ -38,12 +38,42 @@ In de projectmap:
 
 ## API
 ### Public api
-GET: /api/public/users
-POST: /api/private/users
+**Krijg overzicht users**
+<br />
+`GET:` /api/public/users
+<br />
+<br />
+**Maak een user**
+<br />
+`POST:` /api/private/users
+```
+ {
+  user[username]: {username}
+  user[password]: {password}
+  user[date_of_birth]: {date_of_birth}
+  user[email]: {email}
+ }
+```
 
 ### Private api
 #### Genereer eerst een api_key op de settings pagina van je account
-DEL: /api/private/users/{user_id}
-PUT: /api/private/users/{user_id}
+**Verwijder een user**
+<br />
+`DEL:` /api/private/users/{user_id}
+<br />
+<br />
+**Update een user**
+<br />
+`PUT:` /api/private/users/{user_id}
+```
+ {
+  user[username]: {username}
+  user[password]: {password}
+  user[date_of_birth]: {date_of_birth}
+  user[email]: {email}
+  user[profile_image]: {profile_image}
+  user[banner_image]: {banner_image}
+ }
+```
 
 
