@@ -43,7 +43,7 @@ defmodule TwitterClone.UserContext.User do
     |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :api_token])
     |> unique_constraint(:username)
     |> validate_required([:username, :password, :date_of_birth, :email, :api_token])
-
+    |> put_password_hash()
   end
 
   @doc false
