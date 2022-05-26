@@ -30,7 +30,7 @@ defmodule TwitterCloneWeb.SettingsController do
 
     token = Phoenix.Token.sign(
       TwitterCloneWeb.Endpoint,
-      inspect(__MODULE__),
+      "user auth",
       current_user.id
     )
 

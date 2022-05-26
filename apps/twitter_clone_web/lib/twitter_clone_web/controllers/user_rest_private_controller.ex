@@ -9,9 +9,6 @@ defmodule TwitterCloneWeb.UserRestPrivateController do
   alias TwitterClone.UserRelationsContext.UserRelations
   alias TwitterCloneWeb.Plugs.ApiPlug
 
-
-
-
   action_fallback TwitterCloneWeb.FallbackController
 
   def index(conn, _params) do
@@ -47,7 +44,9 @@ defmodule TwitterCloneWeb.UserRestPrivateController do
   end
 
   def delete(conn, %{"id" => id}) do
+    IO.puts("delete")
     current_user_id = conn.assigns.current_user
+    IO.puts(current_user_id)
     current_user = UserContext.get_user!(current_user_id)
 
     user = UserContext.get_user!(id)

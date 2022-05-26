@@ -10,7 +10,6 @@ defmodule TwitterCloneWeb.Plugs.ApiPlug do
     |> verify_token()
     |> case do
       {:ok, user_id} ->
-        IO.puts(user_id)
         assign(conn, :current_user, user_id)
       _unauthorized -> assign(conn, :current_user, nil)
     end
@@ -41,7 +40,7 @@ defmodule TwitterCloneWeb.Plugs.ApiPlug do
   def generate_token(user_id) do
     Phoenix.Token.sign(
       TwitterCloneWeb.Endpoint,
-      inspect(__MODULE__),
+      "user auth",
       user_id
     )
   end
@@ -70,7 +69,7 @@ defmodule TwitterCloneWeb.Plugs.ApiPlug do
 
     Phoenix.Token.verify(
       TwitterCloneWeb.Endpoint,
-      inspect(__MODULE__),
+      "user auth",
       token,
       max_age: one_month
     )

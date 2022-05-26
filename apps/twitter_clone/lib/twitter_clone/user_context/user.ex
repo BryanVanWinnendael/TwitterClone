@@ -40,18 +40,16 @@ defmodule TwitterClone.UserContext.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :api_token, :role])
+    |> cast(attrs, [:username, :password, :date_of_birth, :email, :profile_image, :banner_image, :api_token])
     |> unique_constraint(:username)
-    |> validate_required([:username, :password, :date_of_birth, :email, :role])
-    |> validate_inclusion(:role, @acceptable_roles)
-    |> put_password_hash()
+    |> validate_required([:username, :password, :date_of_birth, :email, :api_token])
 
   end
 
   @doc false
   def changeset_edit_profile(user, attrs) do
     user
-    |> cast(attrs, [:profile_image, :banner_image])
+    |> cast(attrs, [:profile_image, :banner_image, :api_token])
   end
 
   @doc false
