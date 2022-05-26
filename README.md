@@ -35,3 +35,15 @@ In de projectmap:
 | test     | test     | User  |
 | test2    | test     | User  |
 | admin    | admin    | Admin |
+
+## API
+### Public api
+GET: /api/public/users
+POST: /api/private/users
+
+### Private api
+#### Genereer eerst een api_key op de settings pagina van je account
+DEL: /api/private/users/{user_id}
+PUT: /api/private/users/{user_id}
+
+
