@@ -8,13 +8,13 @@
 
 ## Setup Project
 
-Om de dependencies te installeren ga naar de root folder van het project en voer uit:
+Voer de volgende opdrachten uit in de projectmap om aan de slag te gaan:
 
 ```mix
  mix deps.get
 ```
 
-Hierna in de apps/twitter_clone:
+apps/twitter_clone:
 
 ```mix
  mix ecto.reset
@@ -22,7 +22,7 @@ Hierna in de apps/twitter_clone:
 
 ## Project opstarten
 
-In de root folder voer uit:
+In de projectmap:
 
 ```mix
  mix phx.server
