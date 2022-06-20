@@ -45,12 +45,14 @@ In de projectmap:
 <br />
 **Maak een user**
 <br />
-`POST:` /api/private/users
+`POST:` /api/public/users
 ```
  {
   user[username]: {username}
   user[password]: {password}
-  user[date_of_birth]: {date_of_birth}
+  user[date_of_birth][day]: {day}
+  user[date_of_birth][month]: {month}
+  user[date_of_birth][year]: {year}
   user[email]: {email}
  }
 ```
