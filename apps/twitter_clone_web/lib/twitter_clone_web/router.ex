@@ -113,7 +113,7 @@ defmodule TwitterCloneWeb.Router do
   scope "/api/public", TwitterCloneWeb do
     pipe_through :api
 
-    resources "/users" , UserRestPublicController, only: [:index]
+    resources "/users" , UserRestPublicController, only: [:index, :create]
   end
 
   scope "/api/private", TwitterCloneWeb do

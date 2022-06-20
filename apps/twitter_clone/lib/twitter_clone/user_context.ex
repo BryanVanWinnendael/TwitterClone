@@ -73,6 +73,13 @@ defmodule TwitterClone.UserContext do
     |> Repo.insert()
   end
 
+  def create_user_default(attrs \\ %{}) do
+    %User{}
+    |> User.changeset_default(attrs)
+    |> Repo.insert()
+  end
+
+
   defdelegate get_acceptable_roles(), to: User
 
   def update_user(attrs, %User{} = user, current_user) do
