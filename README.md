@@ -8,8 +8,6 @@
 
 ## Setup Project
 
-Voer de volgende opdrachten uit in de projectmap om aan de slag te gaan:
-
 ```mix
  mix deps.get
 ```
@@ -20,9 +18,7 @@ apps/twitter_clone:
  mix ecto.reset
 ```
 
-## Project opstarten
-
-In de projectmap:
+## Startup
 
 ```mix
  mix phx.server
@@ -38,12 +34,12 @@ In de projectmap:
 
 ## API
 ### Public api
-**Krijg overzicht users**
+**Overview users**
 <br />
 `GET:` /api/public/users
 <br />
 <br />
-**Maak een user**
+**Create user**
 <br />
 `POST:` /api/public/users
 ```
@@ -58,13 +54,13 @@ In de projectmap:
 ```
 
 ### Private api
-#### Genereer eerst een api_key op de settings pagina van je account
-**Verwijder een user**
+#### GEnerate first an api_key on the settings page of your account
+**Delete user**
 <br />
 `DEL:` /api/private/users/{user_id}
 <br />
 <br />
-**Update een user**
+**Update user**
 <br />
 `PUT:` /api/private/users/{user_id}
 ```
