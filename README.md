@@ -54,7 +54,7 @@ apps/twitter_clone:
 ```
 
 ### Private api
-#### GEnerate first an api_key on the settings page of your account
+#### Generate first an api_key on the settings page of your account
 **Delete user**
 <br />
 `DEL:` /api/private/users/{user_id}
