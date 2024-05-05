@@ -8,7 +8,7 @@ import Config
 config :twitter_clone, TwitterClone.Repo,
   username: "root",
   password: "t",
-  hostname: "localhost",
+  hostname: "89.168.49.82",
   database: "twitter_clone_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10

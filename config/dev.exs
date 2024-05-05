@@ -4,7 +4,7 @@ import Config
 config :twitter_clone, TwitterClone.Repo,
   username: "root",
   password: "t",
-  hostname: "localhost",
+  hostname: "89.168.49.82",
   database: "twitter_clone_dev",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -18,7 +18,7 @@ config :twitter_clone, TwitterClone.Repo,
 config :twitter_clone_web, TwitterCloneWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,

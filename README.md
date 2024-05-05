@@ -2,27 +2,14 @@
 
 ## Setup Database
 
-```docker
- docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=t -d mysql
+Change the datebase settings in config/dev.exs
+
+## Run
+```bash
+docker compose up -d
 ```
 
-## Setup Project
 
-```mix
- mix deps.get
-```
-
-apps/twitter_clone:
-
-```mix
- mix ecto.reset
-```
-
-## Startup
-
-```mix
- mix phx.server
-```
 
 ## Default users
 
@@ -30,7 +17,7 @@ apps/twitter_clone:
 | -------- | -------- | ----- |
 | test     | test     | User  |
 | test2    | test     | User  |
-| admin    | admin    | Admin |
+| admin    | ***    | Admin |
 
 ## API
 ### Public api
@@ -42,7 +29,7 @@ apps/twitter_clone:
 **Create user**
 <br />
 `POST:` /api/public/users
-```
+```json
  {
   user[username]: {username}
   user[password]: {password}
@@ -63,7 +50,7 @@ apps/twitter_clone:
 **Update user**
 <br />
 `PUT:` /api/private/users/{user_id}
-```
+```json
  {
   user[username]: {username}
   user[password]: {password}
