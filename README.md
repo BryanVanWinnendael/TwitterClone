@@ -1,8 +1,11 @@
 # TwitterClone <img src="https://github.com/BryanVanWinnendael/TwitterClone/blob/main/apps/twitter_clone_web/priv/static/images/twitter.png" alt="drawing" width="50"/> 
 
 ## Setup Database
+```bash
+ docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=t -d mysql
+```
 
-Change the datebase settings in config/dev.exs
+Change the datebase settings in config/dev.exs if needed
 
 ## Run
 ```bash
