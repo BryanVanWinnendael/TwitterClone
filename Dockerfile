@@ -24,6 +24,9 @@ WORKDIR /app
 RUN mix deps.get
 
 WORKDIR /app/apps/twitter_clone
+RUN mix ecto.migrate
+
+WORKDIR /app/apps/twitter_clone
 RUN mix ecto.reset 
 
 EXPOSE 4000
